@@ -81,3 +81,36 @@ export class ProblemSortVariableLength extends ProblemBase {
         { x: 5, y: 5 });
     }
 }
+
+export class ProblemDigitExploder extends ProblemBase {
+    constructor() {
+        super((seed, num=4) => {
+            const inputs = [];
+            const expected = [];
+            for (let i = 0; i < num; i++) {
+                const digits = (Math.random()*3|0)+1;
+                const value = Math.random()*Math.pow(10, digits)|0;
+                inputs.push(value);
+
+                if (value < 10) {
+                    expected.push(value);
+                }
+                else if (digits < 100) {
+                    expected.push(value/10|0);
+                    expected.push(value%10);
+                }
+                else {
+                    expected.push(value/100|0);
+                    expected.push(value%100/10|0);
+                    expected.push(value%10);
+                }
+            }
+
+            return { inputs, expected };
+        },
+        { 9: 0, 10: 10, 11: 100 },
+        'Digit Exploder',
+        '',
+        { x: 3, y: 4 });
+    }
+}
