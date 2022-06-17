@@ -35,10 +35,12 @@ module.exports = {
       template: './html/index.html',
       inject: 'head'
     }),
-    new CopyPlugin([
-      { from: src + '/assets/external', to: dist + '/assets/external' },
-      { from: src + '/assets/icons', to: dist + '/assets/icons' }
-    ])
+    new CopyPlugin({
+      patterns: [
+        { from: src + '/assets/external', to: dist + '/assets/external' },
+        { from: src + '/assets/icons', to: dist + '/assets/icons' }
+      ]
+    })
   ],
   mode: 'production'
 };
